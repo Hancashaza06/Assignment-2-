@@ -23,11 +23,11 @@ public class A2PhoneBook {
         String phoneNumber;
         String address;
         String city;
+        
+        int menu;
+        int start = 0;
        
-        
-        
-        
-        
+        // Sample Phone Book
         PhoneBook.add("David");
         PhoneBook.add("Rukashaza-Hancock");
         PhoneBook.add("5555555555");
@@ -52,9 +52,14 @@ public class A2PhoneBook {
         PhoneBook.add("somewhere over the rainbow");
         PhoneBook.add("Lynden");
         
-        int start = 0;
-
+        //Starting menu
+        System.out.println("Please Choose An Option:");
+        System.out.println("1. Find A Person In The Phone Book");
+        System.out.println("2. Add A Person To the Phone Book");
         
+        menu = input.nextInt();
+
+        if(menu == 1) {
         //Searching By Name
         System.out.println("Provide A First Name:");
         firstName = input.next();
@@ -89,8 +94,11 @@ while(!PhoneBook.get(start).equals(firstName) && !PhoneBook.get(start + 1).equal
         
             
          default:
-            System.out.println("try again");           
-            play = input.next();
+            System.out.println("Error: Name Not Found:");
+            System.out.println("Provide A New First Name:");
+            firstName = input.next();
+            System.out.println("Provide A New Last Name:");
+            lastName = input.next();
             break;
       }
 
@@ -104,7 +112,9 @@ while(!PhoneBook.get(start).equals(firstName) && !PhoneBook.get(start + 1).equal
          System.out.println(PhoneBook.get(start + 3));
          System.out.println(PhoneBook.get(start + 4));
         System.out.print(PhoneBook);
+        } // end of if
         
+        else {System.out.println("More Features Coming Soon!"); }
         
-    }
-}
+    } // end of main
+} // end of class
