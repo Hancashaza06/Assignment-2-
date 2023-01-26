@@ -17,6 +17,12 @@ public class A2PhoneBook {
     public static void main(String[] args) {
         LinkedList PhoneBook = new LinkedList();
         Scanner input = new Scanner(System.in); // creates scanner method
+        
+        String firstName;
+        String lastName;
+        String phoneNumber;
+        String address;
+        String city;
        
         
         
@@ -29,7 +35,7 @@ public class A2PhoneBook {
         PhoneBook.add("Bellingham");
         
         PhoneBook.add("Jake");
-        PhoneBook.add("Holems");
+        PhoneBook.add("Holmes");
         PhoneBook.add("6666666666");
         PhoneBook.add("123 fake streat");
         PhoneBook.add("Blaine");
@@ -49,21 +55,23 @@ public class A2PhoneBook {
         int start = 0;
 
         
-        //System.out.println("What do you want, 1: fn 2: ln 3: pn 4: ad 5: city?");
-        System.out.println("who do you want");
-      String play = input.next();
+        //Searching By Name
+        System.out.println("Provide A First Name:");
+        firstName = input.next();
+        System.out.println("Provide A Last Name:");
+        lastName = input.next();
       
-while(!PhoneBook.get(start).equals(play)){
+while(!PhoneBook.get(start).equals(firstName) && !PhoneBook.get(start + 1).equals(lastName)){
     start++;
     
 }
       switch (start % 5) {
          
-           case 0:// fallthrough
+           case 0:
             
             break;
           
-          case 1:// fallthrough
+          case 1:
             start --;
             break;
          case 2:
