@@ -8,7 +8,7 @@ private static String address;
 private static String city;
         
 private static int menu;
-private static int start = 0;
+private static int node = 0;
 private static LinkedList<String> PhoneBook = new LinkedList<String>();
 
 
@@ -102,28 +102,28 @@ private static LinkedList<String> PhoneBook = new LinkedList<String>();
         System.out.print("Provide A Last Name:\t");
         lastName = input.next();
       
-        while(!PhoneBook.get(start).equals(firstName) && !PhoneBook.get(start + 1).equals(lastName)){
-           start++;
+        while(!PhoneBook.get(node).equals(firstName) && !PhoneBook.get(node + 1).equals(lastName)){
+           node++;
        } // end of while 
-            switch (start % 5) {
+            switch (node % 5) {
          
                case 0:
                break;
           
                case 1:
-                start --;
+                node --;
                break;
                
                case 2:
-                  start = start - 2;
+                  node = node - 2;
                break;
             
                case 3:
-                  start = start - 3;
+                  node = node - 3;
                break;
             
                case 4:
-                  start = start - 4;
+                  node = node - 4;
                break;
             
                default:
@@ -135,8 +135,8 @@ private static LinkedList<String> PhoneBook = new LinkedList<String>();
                break;
           } // end of switch case
         
-         System.out.println(PhoneBook.get(start) + " " + PhoneBook.get(start + 1) + ":");
-         System.out.println(PhoneBook.get(start + 2) + ", " + PhoneBook.get(start + 3) + ", " + PhoneBook.get(start + 4));
+         System.out.println(PhoneBook.get(node) + " " + PhoneBook.get(node + 1) + ":");
+         System.out.println(PhoneBook.get(node + 2) + ", " + PhoneBook.get(node + 3) + ", " + PhoneBook.get(node + 4));
     } // end find by name
     
     // method to find all residents of specific city
@@ -173,12 +173,20 @@ private static LinkedList<String> PhoneBook = new LinkedList<String>();
             } // end of if
          } // end of for-loop
          if(checkValid == 0) { System.out.println("Unfortunalely, There Are No Contacts From " + city);}
+    end();
     } // end of findByCity
     
     // prompt to end program or return to main menu
     public static void end() {
     Scanner input = new Scanner(System.in); // creates scanner method
-    System.out.println("What Would You Like To Do? 1 = Return To Main Menu 2 = End Program");
+    int answer = 0;
+    System.out.print("\nWhat Would You Like To Do? 1 = Return To Main Menu 2 = End Program\t");
+    answer = input.nextInt();
+    if(answer == 1) { mainMenu(); }
+    else {
+    System.out.println("Program Shutting Down");
+    System.exit(0);
+    }
     }
     
 } // end of class
