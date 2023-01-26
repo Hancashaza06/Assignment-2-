@@ -47,56 +47,55 @@ public class A2PhoneBook {
         
         menu = input.nextInt();
 
-        if(menu == 1) {
-        //Searching By Name
+        if(menu == 1) { //Searching By Name
         System.out.println("Provide A First Name:");
         firstName = input.next();
         System.out.println("Provide A Last Name:");
         lastName = input.next();
       
-while(!PhoneBook.get(start).equals(firstName) && !PhoneBook.get(start + 1).equals(lastName)){
-    start++;
-    
-}
-      switch (start % 5) {
+        while(!PhoneBook.get(start).equals(firstName) && !PhoneBook.get(start + 1).equals(lastName)){
+           start++;
+       } // end of while 
+            switch (start % 5) {
          
-           case 0:
-            
-            break;
+               case 0:
+               break;
           
-          case 1:
-            start --;
-            break;
-         case 2:
-            start = start - 2;
-            break;
+               case 1:
+                start --;
+               break;
+               
+               case 2:
+                  start = start - 2;
+               break;
             
-        case 3:
-            start = start - 3;
-            break;
+               case 3:
+                  start = start - 3;
+               break;
             
-        case 4:
-            start = start - 4;
-            break;
+               case 4:
+                  start = start - 4;
+               break;
             
-         default:
-            System.out.println("Error: Name Not Found:");
-            System.out.println("Provide A New First Name:");
-            firstName = input.next();
-            System.out.println("Provide A New Last Name:");
-            lastName = input.next();
-            break;
-      }
+               default:
+                  System.out.println("Error: Name Not Found:");
+                  System.out.println("Provide A New First Name:");
+                  firstName = input.next();
+                  System.out.println("Provide A New Last Name:");
+                  lastName = input.next();
+               break;
+          } // end of switch case
         
          System.out.println(PhoneBook.get(start));
          System.out.println(PhoneBook.get(start + 1));
          System.out.println(PhoneBook.get(start + 2));
          System.out.println(PhoneBook.get(start + 3));
          System.out.println(PhoneBook.get(start + 4));
-        System.out.print(PhoneBook);
-        } // end of if
-        
-        else {System.out.println("More Features Coming Soon!"); }
-        
+         // System.out.print(PhoneBook);
+     } // end of if
+     // Search By City
+     else if(menu == 2) { System.out.println("More Features Coming Soon!"); }
+     // Add Resident
+     else if(menu == 3) { System.out.println("More Features Coming Soon!"); }   
     } // end of main
 } // end of class
