@@ -46,9 +46,7 @@ public class A2PhoneBook {
         PhoneBook.add("somewhere over the rainbow");
         PhoneBook.add("Lynden");
         
-        int thing = 1;
         int start = 0;
-       // int thing += start;
 
         
         //System.out.println("What do you want, 1: fn 2: ln 3: pn 4: ad 5: city?");
