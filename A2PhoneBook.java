@@ -67,8 +67,7 @@ public class A2PhoneBook {
         lastName = input.next();
       
 while(!PhoneBook.get(start).equals(firstName) && !PhoneBook.get(start + 1).equals(lastName)){
-    start++;
-    
+    start++; 
 }
       switch (start % 5) {
          
@@ -91,8 +90,6 @@ while(!PhoneBook.get(start).equals(firstName) && !PhoneBook.get(start + 1).equal
             start = start - 4;
             break;
             
-        
-            
          default:
             System.out.println("Error: Name Not Found:");
             System.out.println("Provide A New First Name:");
@@ -102,16 +99,12 @@ while(!PhoneBook.get(start).equals(firstName) && !PhoneBook.get(start + 1).equal
             break;
       }
 
-        
-        
-        
-        
          System.out.println(PhoneBook.get(start));
          System.out.println(PhoneBook.get(start + 1));
          System.out.println(PhoneBook.get(start + 2));
          System.out.println(PhoneBook.get(start + 3));
          System.out.println(PhoneBook.get(start + 4));
-        System.out.print(PhoneBook);
+         // System.out.print(PhoneBook);
         } // end of if
         
         else {System.out.println("More Features Coming Soon!"); }
