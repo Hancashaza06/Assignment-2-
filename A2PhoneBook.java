@@ -1,17 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
- */
-
-package com.mycompany.a2phonebook;
-
-import java.util.LinkedList;
-import java.util.*; // imports util. library for random number generator
-
-/**
- *
- * @author rukaD
- */
+import java.util.*; 
 public class A2PhoneBook {
 
     public static void main(String[] args) {
@@ -55,7 +42,8 @@ public class A2PhoneBook {
         //Starting menu
         System.out.println("Please Choose An Option:");
         System.out.println("1. Find A Person In The Phone Book");
-        System.out.println("2. Add A Person To the Phone Book");
+        System.out.println("2. Search Residents By City");
+        System.out.println("3. Add A Person To the Phone Book");
         
         menu = input.nextInt();
 
@@ -67,7 +55,8 @@ public class A2PhoneBook {
         lastName = input.next();
       
 while(!PhoneBook.get(start).equals(firstName) && !PhoneBook.get(start + 1).equals(lastName)){
-    start++; 
+    start++;
+    
 }
       switch (start % 5) {
          
@@ -98,13 +87,13 @@ while(!PhoneBook.get(start).equals(firstName) && !PhoneBook.get(start + 1).equal
             lastName = input.next();
             break;
       }
-
+        
          System.out.println(PhoneBook.get(start));
          System.out.println(PhoneBook.get(start + 1));
          System.out.println(PhoneBook.get(start + 2));
          System.out.println(PhoneBook.get(start + 3));
          System.out.println(PhoneBook.get(start + 4));
-         // System.out.print(PhoneBook);
+        System.out.print(PhoneBook);
         } // end of if
         
         else {System.out.println("More Features Coming Soon!"); }
