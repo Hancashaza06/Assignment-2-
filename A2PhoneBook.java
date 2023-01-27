@@ -101,10 +101,17 @@ private static LinkedList<String> PhoneBook = new LinkedList<String>();
         firstName = input.next();
         System.out.print("Provide A Last Name:\t");
         lastName = input.next();
-      
-        while(!PhoneBook.get(node).equals(firstName) && !PhoneBook.get(node + 1).equals(lastName)){
-           node++;
-       } // end of while 
+        try // for index out of bounds
+        {
+            while(!PhoneBook.get(node).equals(firstName) && !PhoneBook.get(node + 1).equals(lastName)){
+               node++;
+            } // end of while
+        }
+        catch (IndexOutOfBoundsException e) {  
+           System.out.println("I'm Sorry. The Contact Information You Are Searching For Cannot be Found. Try Again");
+           node = 0;
+           findByName();
+           } 
             switch (node % 5) {
          
                case 0:
@@ -134,9 +141,16 @@ private static LinkedList<String> PhoneBook = new LinkedList<String>();
                   lastName = input.next();
                break;
           } // end of switch case
-        
+         
+         System.out.println();
          System.out.println(PhoneBook.get(node) + " " + PhoneBook.get(node + 1) + ":");
          System.out.println(PhoneBook.get(node + 2) + ", " + PhoneBook.get(node + 3) + ", " + PhoneBook.get(node + 4));
+         System.out.println();
+         System.out.print("Would You Like To Update Contact Information for " + PhoneBook.get(node) + " " + PhoneBook.get(node + 1) +"? ");
+         System.out.print("1 = Yes 2 = No\t");
+         int answer = input.nextInt();
+         if(answer == 1) { update(); }
+         else { end(); }
     } // end find by name
     
     // method to find all residents of specific city
@@ -173,8 +187,61 @@ private static LinkedList<String> PhoneBook = new LinkedList<String>();
             } // end of if
          } // end of for-loop
          if(checkValid == 0) { System.out.println("Unfortunalely, There Are No Contacts From " + city);}
-    end();
     } // end of findByCity
+    
+    //method to edit contact information
+    public static void update() {
+    Scanner input = new Scanner(System.in); // creates scanner method
+    int answer = 0;
+    String edit;
+    
+    System.out.println("What Information Would You Like To Update?");
+    System.out.print("1 = First Name, 2 = Last Name, 3 = Phone Number, 4 = Adress, 5 = City\t");
+    answer = input.nextInt();
+      switch (answer) {
+         
+               case 1:
+               System.out.println("Provide New First Name:\t");
+               edit = input.next();
+               PhoneBook.set(node, edit);
+               break;
+          
+               case 2:
+               System.out.println("Provide New Last Name:\t");
+               edit = input.next();
+               PhoneBook.set(node + 1, edit);
+               break;
+               
+               case 3:
+               System.out.println("Provide New Phone Number:\t");
+               edit = input.next();
+               PhoneBook.set(node + 2, edit);
+               break;
+            
+               case 4:
+               System.out.println("Provide New Address:\t");
+               edit = input.next();
+               PhoneBook.set(node + 3, edit);
+               break;
+            
+               case 5:
+               System.out.println("Provide New City:\t");
+               edit = input.next();
+               PhoneBook.set(node + 4, edit);
+               break;
+            
+               default:
+               break;
+          } // end of switch case
+          System.out.println("UPDATE COMPLETE:");
+          System.out.println(PhoneBook.get(node) + " " + PhoneBook.get(node + 1) + ":");
+          System.out.println(PhoneBook.get(node + 2) + ", " + PhoneBook.get(node + 3) + ", " + PhoneBook.get(node + 4));
+          System.out.println();
+          System.out.print("Would you like To Edit Any Additional Information for " + PhoneBook.get(node) + "? 1 = Yes 2 = No\t");
+          answer = input.nextInt();
+          if(answer == 1) { update(); }
+          else { end(); }
+    } // end update
     
     // prompt to end program or return to main menu
     public static void end() {
@@ -182,11 +249,13 @@ private static LinkedList<String> PhoneBook = new LinkedList<String>();
     int answer = 0;
     System.out.print("\nWhat Would You Like To Do? 1 = Return To Main Menu 2 = End Program\t");
     answer = input.nextInt();
-    if(answer == 1) { mainMenu(); }
+    if(answer == 1) { 
+    menu = 0; // resets menu value for mainMenu method
+    mainMenu(); }
     else {
     System.out.println("Program Shutting Down");
     System.exit(0);
     }
-    }
+    }  // end of end
     
 } // end of class
