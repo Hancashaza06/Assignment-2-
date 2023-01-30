@@ -1,15 +1,9 @@
-package com.mycompany.a2phonebook;
-
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.Scanner;
-//import java.util.*; // imports util. library for random number generator
+//import java.util.*;
 
-/**
- *
- * @author rukaD
- */
 public class A2PhoneBook {
 
     private static String firstName;
@@ -101,6 +95,7 @@ public class A2PhoneBook {
                 System.out.println(PhoneBook.get(i + 2) + ", " + PhoneBook.get(i + 3) + ", " + PhoneBook.get(i + 4));
             } // end of if
         } // end of for-loop
+        end();
     }
     // method to search contacts by first + last name
 
@@ -233,13 +228,13 @@ public class A2PhoneBook {
 
             case 4:
                 System.out.println("Provide New Address:\t");
-                edit = input.next();
+                edit = input.nextLine();
                 PhoneBook.set(node + 3, edit);
                 break;
 
             case 5:
                 System.out.println("Provide New City:\t");
-                edit = input.next();
+                edit = input.nextLine();
                 PhoneBook.set(node + 4, edit);
                 break;
 
@@ -275,43 +270,30 @@ public class A2PhoneBook {
     }  // end of end
 /*
     public static void addPerson() {
-
         Scanner input = new Scanner(System.in); // creates scanner method
         int answer = 0;
         String newData;
-
         System.out.println("you chose to add a person. we will ask you the info one at a time, if unknown type null");
-
         System.out.println("Provide First Name:\t");
         newData = input.next();
         PhoneBook.add(node, newData);
-
         System.out.println("Provide Last Name:\t");
         newData = input.next();
         PhoneBook.add(node + 1, newData);
-
         System.out.println("Provide Phone Number:\t");
         newData = input.next();
         PhoneBook.add(node + 2, newData);
-
         System.out.println("Provide Address:\t");
-        newData = input.next();
+        newData = input.nextLine();
         PhoneBook.add(node + 3, newData);
-
         System.out.println("Provide City:\t");
-        newData = input.next();
+        newData = input.nextLine();
         PhoneBook.add(node + 4, newData);
-
         System.out.println("ADD COMPLETE:");
         System.out.println(PhoneBook.get(node) + " " + PhoneBook.get(node + 1) + ":");
         System.out.println(PhoneBook.get(node + 2) + ", " + PhoneBook.get(node + 3) + ", " + PhoneBook.get(node + 4));
         System.out.println();
-        System.out.print("Would you like To Add Any Additional Information for " + PhoneBook.get(node) + "? 1 = Yes 2 = No\t");
-        answer = input.nextInt();
-        if (answer == 1) {
-            update();
-        } else {
-            end();
+        end();
         }
     }// end of addperson
 */
@@ -326,38 +308,31 @@ public class A2PhoneBook {
 
         System.out.println("you chose to add a person. we will ask you the info one at a time, if unknown type null");
 
-        System.out.println("Provide First Name:\t");
+        System.out.print("Provide First Name:\t");
         newData = input.next();
         PhoneBook.addLast(newData);
 
-        System.out.println("Provide Last Name:\t");
+        System.out.print("Provide Last Name:\t");
         newData = input.next();
         PhoneBook.addLast(newData);
         
-        System.out.println("Provide Phone Number:\t");
+        System.out.print("Provide Phone Number:\t");
         newData = input.next();
         PhoneBook.addLast(newData);
         
-        System.out.println("Provide Address:\t");
-        newData = input.next();
+        System.out.print("Provide Address:\t");
+        newData = input.nextLine();
         PhoneBook.addLast(newData);
         
-        System.out.println("Provide City:\t");
-        newData = input.next();
+        System.out.print("Provide City:\t");
+        newData = input.nextLine();
         PhoneBook.addLast(newData);
                 
         System.out.println("ADD COMPLETE:");
         System.out.println(PhoneBook.get(lastPosition + 0) + " " + PhoneBook.get(lastPosition + 1) + ":");
         System.out.println(PhoneBook.get(lastPosition + 2) + ", " + PhoneBook.get(lastPosition + 3) + ", " + PhoneBook.get(lastPosition + 4));
         System.out.println();
-        System.out.print("Would you like To Add Any Additional Information for " + PhoneBook.get(lastPosition + 1) + "? 1 = Yes 2 = No\t");
-        answer = input.nextInt();
-        if (answer == 1) {
-            update();
-        } else {
-            end();
-        }
+        end();
     }// end of addperson
     
 } // end of class
-
