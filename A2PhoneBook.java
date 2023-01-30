@@ -43,6 +43,8 @@ public class A2PhoneBook {
         PhoneBook.add("1000000000");
         PhoneBook.add("somewhere over the rainbow");
         PhoneBook.add("Lynden");
+        
+        addPerson();
 
         //Starting menu
         mainMenu();
@@ -228,6 +230,7 @@ public class A2PhoneBook {
 
             case 4:
                 System.out.println("Provide New Address:\t");
+                edit = input.nextLine(); // clears input
                 edit = input.nextLine();
                 PhoneBook.set(node + 3, edit);
                 break;
@@ -321,6 +324,7 @@ public class A2PhoneBook {
         PhoneBook.addLast(newData);
         
         System.out.print("Provide Address:\t");
+        newData = input.nextLine(); // clears input
         newData = input.nextLine();
         PhoneBook.addLast(newData);
         
