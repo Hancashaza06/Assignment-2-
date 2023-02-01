@@ -1,11 +1,8 @@
-import java.io.*;
 import java.util.*;
   
-// Java program to implement
-// a Singly Linked List
-public class A2PhoneBook {
+class LinkedList {
   
-   Node head; // unique first value of list, starts as empty
+   private Node head; // unique first value of list, starts as empty
     
    static LinkedList phoneBook = new LinkedList(); // empty list
   
@@ -107,8 +104,38 @@ public class A2PhoneBook {
    
    // method to add an entry after a user
    public static void addEntryMiddle(LinkedList phoneBook) {
-      System.out.println("Please Provide The Entry That You'd Like The New Entry To Follow.");
+      Scanner input = new Scanner(System.in); // creates scanner method
+      String firstName; // data value of node
+      String lastName; // data value of node
+      String phone; // data value of node
+      String address; // data value of node
+      String city; // data value of node
+
+      System.out.println("Please Provide The Preceding Entry.");
       Node entry = findEntry(phoneBook);
+
+      System.out.println("NEW ENTRY:");
+
+      System.out.print("Provide First Name:\t");
+      firstName = input.next();
+   
+      System.out.print("Provide Last Name:\t");
+      lastName = input.next();
+        
+      System.out.print("Provide Phone Number:\t");
+      phone = input.next();
+        
+      System.out.print("Provide Address:\t");
+      address = input.nextLine(); // clears input
+      address = input.nextLine();
+        
+      System.out.print("Provide City:\t");
+      city = input.nextLine();
+
+      Node newEntry = new Node(firstName, lastName, phone, address, city); // new entry added
+
+      newEntry.next = entry.next; // connects newEntry to node after entry
+      entry.next = newEntry; // connects entry to newEntry
    }
    
    // method to add another entry to the beginning of the phone book
@@ -247,15 +274,7 @@ public class A2PhoneBook {
       System.out.println("Please Provide The Entry You Would Like To Delete.");
       Node entry = findEntry(phoneBook);
       
-      
-      // prints Jake
-      //System.out.println(phoneBook.head.firstName);
-       // prints Ben
-      //System.out.println(phoneBook.head.next.firstName);
-   
-      
-      //cant delete the last person
-      
+      //if entry is head node cody next node info and unlink to next node
       if (entry.firstName.equals(phoneBook.head.firstName)&& entry.lastName.equals(phoneBook.head.lastName)){
          entry.firstName = entry.next.firstName; 
          entry.lastName = entry.next.lastName;
@@ -263,17 +282,25 @@ public class A2PhoneBook {
          entry.address = entry.next.address;
          entry.city = entry.next.city;
          entry.next = entry.next.next;
-      
       }
-       
+      // if entry is not the head 
       else{  
-      entry.next = entry.next.next;
+         Node beforeEntry = phoneBook.head; // start of the linkedList
+         while (beforeEntry.next != entry) { // only last node will have next = null;
+            beforeEntry = beforeEntry.next; // moves to the next node
+         } // end while
+
+        if(beforeEntry.next.next != null) { // if theres a node after node we want to delete, connect to it
+         beforeEntry.next = beforeEntry.next.next;
+        }
+        else { // cut connection
+        beforeEntry.next = null;
+        }
+        entry.next = null; // cuts entry's connection to next node
       }
       
       loop();
    } // end edit
-
-   
    
    // method to search entries by first and last name
    public static Node findEntry(LinkedList phoneBook) {
@@ -296,12 +323,6 @@ public class A2PhoneBook {
          System.out.println("Entry Could Not Be Found");
          loop();
       }
-      else {
-         System.out.println("\nCONTACT INFORMATION:");
-         System.out.println(entry.firstName + " " + entry.lastName + ":");
-         System.out.println(entry.phone + ", " + entry.address + ", " + entry.city);
-         System.out.println();
-      } // end of else
       return entry;
    } // end of search method
    
@@ -317,9 +338,7 @@ public class A2PhoneBook {
          System.exit(0);
       }  // end of loop
    }  // end of end
-
-
-} // end of class
+} // end of phonebook class
 
 class Node {
   
