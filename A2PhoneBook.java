@@ -1,342 +1,343 @@
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.LinkedList;
-import java.util.Scanner;
-//import java.util.*;
-
+import java.io.*;
+import java.util.*;
+  
+// Java program to implement
+// a Singly Linked List
 public class A2PhoneBook {
-
-    private static String firstName;
-    private static String lastName;
-    private static String phoneNumber;
-    private static String address;
-    private static String city;
-
-    private static int menu;
-    private static int node = 0;
-    private static LinkedList<String> PhoneBook = new LinkedList<String>();
-
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in); // creates scanner method
-
-        // Sample Phone Book
-        PhoneBook.add("David");
-        PhoneBook.add("Rukashaza-Hancock");
-        PhoneBook.add("5555555555");
-        PhoneBook.add("783 my home");
-        PhoneBook.add("Bellingham");
-
-        PhoneBook.add("Jake");
-        PhoneBook.add("Holmes");
-        PhoneBook.add("6666666666");
-        PhoneBook.add("123 fake streat");
-        PhoneBook.add("Blaine");
-
-        PhoneBook.add("Ben");
-        PhoneBook.add("Diskin");
-        PhoneBook.add("6969696969");
-        PhoneBook.add("420 boulavard");
-        PhoneBook.add("Bellingham");
-
-        PhoneBook.add("Jaspreet");
-        PhoneBook.add("Khatkar");
-        PhoneBook.add("1000000000");
-        PhoneBook.add("somewhere over the rainbow");
-        PhoneBook.add("Lynden");
-        
-        addPerson();
-
-        //Starting menu
-        mainMenu();
-    } // end of main
-
-    //---------------------------------- METHODS:
-    // program main menu
-    public static void mainMenu() {
-        Scanner input = new Scanner(System.in); // creates scanner method
-        while (menu < 1 || menu > 5) {
-            try {
-                System.out.println("Please Choose An Option:");
-                System.out.println("1. View Entire Phone Directory");
-                System.out.println("2. Search For Contact Entry By First And Last Name");
-                System.out.println("3. Search All Contact Entries By City");
-                System.out.println("4. Add An Entry To the Phone Book");
-                System.out.println("5. End The Program");
-                menu = input.nextInt();
-            } catch (InputMismatchException e) {
-                String error = input.nextLine();
-            }
-            if (menu < 1 || menu > 5) {
-                System.out.println("Error: Not A Valid Response");
-            }
-        } // end of while
-
-        if (menu == 1) { // View Entire Directory
-            viewDirectory();
-        } // end view if
-        else if (menu == 2) { // Search By Name
-            findByName(); // method to find resident by name
-        } // end name search if
-        else if (menu == 3) { // Search By City
-            findByCity();
-        } // end of city search
-        else if (menu == 4) { // Add Contact
-            addPerson();
-        } else { // end program
-            System.out.println("Program Shutting Down...");
-            System.exit(0);
-        } // end of else
-    } // end of main menu
-
-    // method to view all contacts
-    public static void viewDirectory() {
-        System.out.println("PHONE DIRECTTORY:");
-        for (int i = 0; i < PhoneBook.size(); i++) {
-            if (i % 5 == 0) {
-                System.out.print(PhoneBook.get(i) + " " + PhoneBook.get(i + 1) + ": ");
-                System.out.println(PhoneBook.get(i + 2) + ", " + PhoneBook.get(i + 3) + ", " + PhoneBook.get(i + 4));
-            } // end of if
-        } // end of for-loop
-        end();
-    }
-    // method to search contacts by first + last name
-
-    public static void findByName() {
-        Scanner input = new Scanner(System.in); // creates scanner method
-        System.out.print("Provide A First Name:\t");
-        firstName = input.next();
-        System.out.print("Provide A Last Name:\t");
-        lastName = input.next();
-        try // for index out of bounds
-        {
-            while (!PhoneBook.get(node).equals(firstName) && !PhoneBook.get(node + 1).equals(lastName)) {
-                node++;
-            } // end of while
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("I'm Sorry. The Contact Information You Are Searching For Cannot be Found. Try Again");
-            node = 0;
-            findByName();
-        }
-        switch (node % 5) {
-
-            case 0:
-                break;
-
-            case 1:
-                node--;
-                break;
-
-            case 2:
-                node = node - 2;
-                break;
-
-            case 3:
-                node = node - 3;
-                break;
-
-            case 4:
-                node = node - 4;
-                break;
-
-            default:
-                System.out.println("Error: Name Not Found:");
-                System.out.println("Provide A New First Name:");
-                firstName = input.next();
-                System.out.println("Provide A New Last Name:");
-                lastName = input.next();
-                break;
-        } // end of switch case
-
-        System.out.println();
-        System.out.println(PhoneBook.get(node) + " " + PhoneBook.get(node + 1) + ":");
-        System.out.println(PhoneBook.get(node + 2) + ", " + PhoneBook.get(node + 3) + ", " + PhoneBook.get(node + 4));
-        System.out.println();
-        System.out.print("Would You Like To Update Contact Information for " + PhoneBook.get(node) + " " + PhoneBook.get(node + 1) + "? ");
-        System.out.print("1 = Yes 2 = No\t");
-        int answer = input.nextInt();
-        if (answer == 1) {
-            update();
-        } else {
-            end();
-        }
-    } // end find by name
-
-    // method to find all residents of specific city
-    public static void findByCity() {
-        int checkValid = 0; // to check if anyone appears
-        Scanner input = new Scanner(System.in); // creates scanner method
-        ArrayList<String> cities = new ArrayList<String>(); // array to capture cities
-
-        System.out.println("CITIES WITHIN THIS DIRECTORY:");
-        for (int i = 0; i < PhoneBook.size(); i++) {
-            if ((i + 1) % 5 == 0) {  // cities in the linked list
-                cities.add(PhoneBook.get(i));
-            } // end of if
-        } // end of for-loop i
-
-        for (int i = 0; i < cities.size(); i++) {
-            for (int j = 0; j < cities.size(); j++) {
-                if (cities.get(i).equals(cities.get(j)) && i != j) { // checks city name against other city names
-                    cities.remove(j); // removes duplicate copy of city name
-                }
-            }
-        }
-
-        System.out.println(cities.toString());
-
-        System.out.print("Provide The Name Of The City You Are Searching:\t");
-        city = input.next();
-        System.out.println(city.toUpperCase() + " RESIDENTS:");
-        for (int i = 0; i < PhoneBook.size(); i++) {
-            if (PhoneBook.get(i).equals(city)) {
-                System.out.print(PhoneBook.get(i - 4) + " " + PhoneBook.get(i - 3) + ": ");
-                System.out.println(PhoneBook.get(i - 2) + ", " + PhoneBook.get(i - 1));
-                checkValid++;
-            } // end of if
-        } // end of for-loop
-        if (checkValid == 0) {
-            System.out.println("Unfortunalely, There Are No Contacts From " + city);
-        }
-    } // end of findByCity
-
-    //method to edit contact information
-    public static void update() {
-        Scanner input = new Scanner(System.in); // creates scanner method
-        int answer = 0;
-        String edit;
-
-        System.out.println("What Information Would You Like To Update?");
-        System.out.print("1 = First Name, 2 = Last Name, 3 = Phone Number, 4 = Adress, 5 = City\t");
-        answer = input.nextInt();
-        switch (answer) {
-
-            case 1:
-                System.out.println("Provide New First Name:\t");
-                edit = input.next();
-                PhoneBook.set(node, edit);
-                break;
-
-            case 2:
-                System.out.println("Provide New Last Name:\t");
-                edit = input.next();
-                PhoneBook.set(node + 1, edit);
-                break;
-
-            case 3:
-                System.out.println("Provide New Phone Number:\t");
-                edit = input.next();
-                PhoneBook.set(node + 2, edit);
-                break;
-
-            case 4:
-                System.out.println("Provide New Address:\t");
-                edit = input.nextLine(); // clears input
-                edit = input.nextLine();
-                PhoneBook.set(node + 3, edit);
-                break;
-
-            case 5:
-                System.out.println("Provide New City:\t");
-                edit = input.nextLine();
-                PhoneBook.set(node + 4, edit);
-                break;
-
-            default:
-                break;
-        } // end of switch case
-        System.out.println("UPDATE COMPLETE:");
-        System.out.println(PhoneBook.get(node) + " " + PhoneBook.get(node + 1) + ":");
-        System.out.println(PhoneBook.get(node + 2) + ", " + PhoneBook.get(node + 3) + ", " + PhoneBook.get(node + 4));
-        System.out.println();
-        System.out.print("Would you like To Edit Any Additional Information for " + PhoneBook.get(node) + "? 1 = Yes 2 = No\t");
-        answer = input.nextInt();
-        if (answer == 1) {
-            update();
-        } else {
-            end();
-        }
-    } // end update
-
-    // prompt to end program or return to main menu
-    public static void end() {
-        Scanner input = new Scanner(System.in); // creates scanner method
-        int answer = 0;
-        System.out.print("\nWhat Would You Like To Do? 1 = Return To Main Menu 2 = End Program\t");
-        answer = input.nextInt();
-        if (answer == 1) {
-            menu = 0; // resets menu value for mainMenu method
-            mainMenu();
-        } else {
-            System.out.println("Program Shutting Down");
-            System.exit(0);
-        }
-    }  // end of end
-/*
-    public static void addPerson() {
-        Scanner input = new Scanner(System.in); // creates scanner method
-        int answer = 0;
-        String newData;
-        System.out.println("you chose to add a person. we will ask you the info one at a time, if unknown type null");
-        System.out.println("Provide First Name:\t");
-        newData = input.next();
-        PhoneBook.add(node, newData);
-        System.out.println("Provide Last Name:\t");
-        newData = input.next();
-        PhoneBook.add(node + 1, newData);
-        System.out.println("Provide Phone Number:\t");
-        newData = input.next();
-        PhoneBook.add(node + 2, newData);
-        System.out.println("Provide Address:\t");
-        newData = input.nextLine();
-        PhoneBook.add(node + 3, newData);
-        System.out.println("Provide City:\t");
-        newData = input.nextLine();
-        PhoneBook.add(node + 4, newData);
-        System.out.println("ADD COMPLETE:");
-        System.out.println(PhoneBook.get(node) + " " + PhoneBook.get(node + 1) + ":");
-        System.out.println(PhoneBook.get(node + 2) + ", " + PhoneBook.get(node + 3) + ", " + PhoneBook.get(node + 4));
-        System.out.println();
-        end();
-        }
-    }// end of addperson
-*/
+  
+   Node head; // unique first value of list, starts as empty
     
-    public static void addPerson() {
-
-        int lastPosition = PhoneBook.size();
+   static LinkedList phoneBook = new LinkedList(); // empty list
+  
+   public static void main(String[] args) {
+   
+        // SAMPLE VALUES
+      phoneBook = createNode(phoneBook, "Jake", "Holmes", "111-111-1111", "123 Fake St", "Birch Bay");
+      phoneBook = createNode(phoneBook, "Ben", "Diskin", "222-222-2222", "123 Fake St", "Bellingham");
+      phoneBook = createNode(phoneBook, "Jaspreet", "Khatkar", "333-333-3333", "123 Fake St", "Lynden");
+      phoneBook = createNode(phoneBook, "David", "R-H", "222-222-2222", "123 Fake St", "Bellingham");
         
-        Scanner input = new Scanner(System.in); // creates scanner method
-        int answer = 0;
-        String newData;
-
-        System.out.println("you chose to add a person. we will ask you the info one at a time, if unknown type null");
-
-        System.out.print("Provide First Name:\t");
-        newData = input.next();
-        PhoneBook.addLast(newData);
-
-        System.out.print("Provide Last Name:\t");
-        newData = input.next();
-        PhoneBook.addLast(newData);
+   
+        // add menu
+      mainMenu();
+           
+   } // end of main
+    
+    // Method to print the LinkedList.
+   public static void viewDirectory(LinkedList phoneBook)
+   {
+      Node currentNode = phoneBook.head; // starts by looking at head value
+      System.out.println("\nPHONE DIRECTORY:");
+        // Traverse through the LinkedList
+      while (currentNode != null) {
+         System.out.println(currentNode.firstName + " " + currentNode.lastName + ":");
+         System.out.println(currentNode.phone + ", " + currentNode.address + ", " + currentNode.city + ".");
+         currentNode = currentNode.next; // go to the next node
+      } // end of while
+      loop();
+   } // end viewDirectory
+    
+    // Method to create a new node
+   public static LinkedList createNode(LinkedList phoneBook, String firstName, String lastName, String phone, String address, String city)
+   {
+      Node node = new Node(firstName, lastName, phone, address, city); // create a new node object from the data parameter
+   
+      if (phoneBook.head == null) { phoneBook.head = node; } // If linked list is empty, make new node head
+      else {
+            // Else traverse till the end and add the new node
+         Node tail = phoneBook.head; // start of the linkedList
+         while (tail.next != null) { // only last node will have next = null;
+            tail = tail.next; // moves to the next node
+         } // end while
+         tail.next = node; // changes next value of last node to data value of new node
+      }
+      return phoneBook; // ends method
+   } // end of createNode method
+    
+// program main menu
+   public static void mainMenu() {
+      int menu = 0;
+      Scanner input = new Scanner(System.in); // creates scanner method
+      while (menu < 1 || menu > 5) {
+         try {
+            System.out.println("Please Choose An Option:");
+            System.out.println("1. View Phone Directory");
+            System.out.println("2. Edit Phone Book Entry");
+            System.out.println("3. Delete Phone Book Entry");
+            System.out.println("4. Add An Entry To The Phone Book");
+            System.out.println("5. End The Program");
+            menu = input.nextInt();
+         } catch (InputMismatchException e) {
+            String error = input.nextLine();
+         }
+         if (menu < 1 || menu > 5) {
+            System.out.println("Error: Not A Valid Response");
+         }
+      } // end of while
+   
+      if (menu == 1) { // View Entire Directory
+         viewDirectory(phoneBook);
+      } // end view if
+      else if (menu == 2) { // Edit
+         editEntry(phoneBook);
+      } // end name search if
+      else if (menu == 3) { // Delete
+         deleteEntry(phoneBook);
+      }
+      else if (menu == 4) { // add entry
+         addEntry(phoneBook);
+      }
+      else { // end program
+         System.out.println("Program Shutting Down...");
+         System.exit(0);
+      } // end of else
+   } // end of main menu
+   
+   public static void addEntry(LinkedList phoneBook) {
+      Scanner input = new Scanner(System.in); // creates scanner method
+      int answer;
+      System.out.println("Where In The Phone Book Would You Like To Add The New Entry? 1 = Beginning 2 = Middle 3 = End");
+      answer = input.nextInt();
+   
+      if(answer == 1) { addEntryBeginning(phoneBook); }
+      else if(answer == 2) { addEntryMiddle(phoneBook); }
+      else { addEntryEnd(phoneBook); }
+      loop();
+   }
+   
+   // method to add an entry after a user
+   public static void addEntryMiddle(LinkedList phoneBook) {
+      System.out.println("Please Provide The Entry That You'd Like The New Entry To Follow.");
+      Node entry = findEntry(phoneBook);
+   }
+   
+   // method to add another entry to the beginning of the phone book
+   public static void addEntryBeginning(LinkedList phoneBook) {
+   
+      Scanner input = new Scanner(System.in); // creates scanner method
+      String firstName; // data value of node
+      String lastName; // data value of node
+      String phone; // data value of node
+      String address; // data value of node
+      String city; // data value of node
+   
+   
+      Node oldHead = new Node(phoneBook.head.firstName, phoneBook.head.lastName, phoneBook.head.phone, phoneBook.head.address, phoneBook.head.city);
+      oldHead.next = phoneBook.head.next; // copies values from linklist head
+   
+      System.out.print("Provide First Name:\t");
+      firstName = input.next();
+   
+      System.out.print("Provide Last Name:\t");
+      lastName = input.next();
         
-        System.out.print("Provide Phone Number:\t");
-        newData = input.next();
-        PhoneBook.addLast(newData);
+      System.out.print("Provide Phone Number:\t");
+      phone = input.next();
         
-        System.out.print("Provide Address:\t");
-        newData = input.nextLine(); // clears input
-        newData = input.nextLine();
-        PhoneBook.addLast(newData);
+      System.out.print("Provide Address:\t");
+      address = input.nextLine(); // clears input
+      address = input.nextLine();
         
-        System.out.print("Provide City:\t");
-        newData = input.nextLine();
-        PhoneBook.addLast(newData);
+      System.out.print("Provide City:\t");
+      city = input.nextLine();
+   
+   // replaces current head values with new values
+      phoneBook.head.firstName = firstName; 
+      phoneBook.head.lastName = lastName;
+      phoneBook.head.phone = phone;
+      phoneBook.head.address = address;
+      phoneBook.head.city = city;
+      phoneBook.head.next = oldHead;
+   
+      System.out.println("ENTRY SUCCESSFULLY ADDED:");
+      System.out.println(phoneBook.head.firstName + " " + phoneBook.head.lastName + ":");
+      System.out.println(phoneBook.head.phone + ", " + phoneBook.head.address + ", " + phoneBook.head.city);
+      System.out.println();
+   }// end of addEntryBeginning
+   
+   // method to add another entry to the end of the phone book
+   public static void addEntryEnd(LinkedList phoneBook) {
+      String firstName; // data value of node
+      String lastName; // data value of node
+      String phone; // data value of node
+      String address; // data value of node
+      String city; // data value of node
+      Scanner input = new Scanner(System.in); // creates scanner method
+   
+   
+      System.out.print("Provide First Name:\t");
+      firstName = input.next();
+   
+      System.out.print("Provide Last Name:\t");
+      lastName = input.next();
+        
+      System.out.print("Provide Phone Number:\t");
+      phone = input.next();
+        
+      System.out.print("Provide Address:\t");
+      address = input.nextLine(); // clears input
+      address = input.nextLine();
+        
+      System.out.print("Provide City:\t");
+      city = input.nextLine();
+        
+      createNode(phoneBook, firstName, lastName, phone, address, city); // creates the new node at the end
                 
-        System.out.println("ADD COMPLETE:");
-        System.out.println(PhoneBook.get(lastPosition + 0) + " " + PhoneBook.get(lastPosition + 1) + ":");
-        System.out.println(PhoneBook.get(lastPosition + 2) + ", " + PhoneBook.get(lastPosition + 3) + ", " + PhoneBook.get(lastPosition + 4));
-        System.out.println();
-        end();
-    }// end of addperson
-    
+      System.out.println("ENTRY SUCCESSFULLY ADDED:");
+      System.out.println(firstName + " " + lastName + ":");
+      System.out.println(phone + ", " + address + ", " + city);
+      System.out.println();
+   } // end add entry
+   
+   // method to edit entry
+   public static void editEntry(LinkedList phoneBook) {
+      System.out.println("Please Provide The Entry You Would Like To Edit.");
+      Node entry = findEntry(phoneBook);
+      
+      
+      Scanner input = new Scanner(System.in); // creates scanner method
+      int answer = 0;
+      String edit;
+   
+      System.out.println("What Information Would You Like To Update?");
+      System.out.print("1 = First Name, 2 = Last Name, 3 = Phone Number, 4 = Adress, 5 = City\t");
+      answer = input.nextInt();
+      switch (answer) {
+      
+         case 1:
+            System.out.println("Provide New First Name:\t");
+            edit = input.next();
+            entry.firstName = edit; 
+         
+            break;
+      
+         case 2:
+            System.out.println("Provide New Last Name:\t");
+            edit = input.next();
+            entry.lastName = edit;
+            break;
+      
+         case 3:
+            System.out.println("Provide New Phone Number:\t");
+            edit = input.next();
+            entry.phone = edit;
+            break;
+      
+         case 4:
+            System.out.println("Provide New Address:\t");
+            edit = input.next();
+            entry.address = edit;
+            break;
+      
+         case 5:
+            System.out.println("Provide New City:\t");
+            edit = input.next();
+            entry.city = edit;
+            break;
+      
+         default:
+            break;
+      
+      }//end of the switch
+      loop();
+   } // end edit
+   
+    // method to delete entry
+   public static void deleteEntry(LinkedList phoneBook) {
+      System.out.println("Please Provide The Entry You Would Like To Delete.");
+      Node entry = findEntry(phoneBook);
+      
+      
+      // prints Jake
+      //System.out.println(phoneBook.head.firstName);
+       // prints Ben
+      //System.out.println(phoneBook.head.next.firstName);
+   
+      
+      //cant delete the last person
+      
+      if (entry.firstName.equals(phoneBook.head.firstName)&& entry.lastName.equals(phoneBook.head.lastName)){
+         entry.firstName = entry.next.firstName; 
+         entry.lastName = entry.next.lastName;
+         entry.phone = entry.next.phone;
+         entry.address = entry.next.address;
+         entry.city = entry.next.city;
+         entry.next = entry.next.next;
+      
+      }
+       
+      else{  
+      entry.next = entry.next.next;
+      }
+      
+      loop();
+   } // end edit
+
+   
+   
+   // method to search entries by first and last name
+   public static Node findEntry(LinkedList phoneBook) {
+      Scanner input = new Scanner(System.in); // creates scanner method
+      String firstName; // data value of node
+      String lastName; // data value of node
+      int answer = 0;
+   
+      System.out.print("First Name:\t");
+      firstName = input.next();
+   
+      System.out.print("Last Name:\t");
+      lastName = input.next();
+   
+      Node entry = phoneBook.head; // start of the linkedList
+      while (entry.next != null && !entry.firstName.equals(firstName) && !entry.lastName.equals(lastName)) { // only last node will have next = null;
+         entry = entry.next; // moves to the next node
+      } // end while
+      if(!entry.firstName.equals(firstName)) { 
+         System.out.println("Entry Could Not Be Found");
+         loop();
+      }
+      else {
+         System.out.println("\nCONTACT INFORMATION:");
+         System.out.println(entry.firstName + " " + entry.lastName + ":");
+         System.out.println(entry.phone + ", " + entry.address + ", " + entry.city);
+         System.out.println();
+      } // end of else
+      return entry;
+   } // end of search method
+   
+   public static void loop() {
+      Scanner input = new Scanner(System.in); // creates scanner method
+      int answer = 0;
+      System.out.print("\nWhat Would You Like To Do? 1 = Return To Main Menu 2 = End Program\t");
+      answer = input.nextInt();
+      if (answer == 1) {
+         mainMenu();
+      } else {
+         System.out.println("Program Shutting Down");
+         System.exit(0);
+      }  // end of loop
+   }  // end of end
+
+
 } // end of class
+
+class Node {
+  
+   protected String firstName; // data value of node
+   protected String lastName; // data value of node
+   protected String phone; // data value of node
+   protected String address; // data value of node
+   protected String city; // data value of node
+   protected Node next; // pointer that connects nodes together because there is no index. its value will be the following node
+  
+   // Constructor
+   Node(String firstName, String lastName, String phone, String address, String city)
+   {
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.phone = phone;
+      this.address = address;
+      this.city = city;
+      next = null; // value will be set by next node
+   }
+} // end of class node
