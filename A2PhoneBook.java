@@ -110,12 +110,12 @@ class LinkedList {
       String phone; // data value of node
       String address; // data value of node
       String city; // data value of node
-
+   
       System.out.println("Please Provide The Preceding Entry.");
       Node entry = findEntry(phoneBook);
-
+   
       System.out.println("NEW ENTRY:");
-
+   
       System.out.print("Provide First Name:\t");
       firstName = input.next();
    
@@ -131,9 +131,9 @@ class LinkedList {
         
       System.out.print("Provide City:\t");
       city = input.nextLine();
-
+   
       Node newEntry = new Node(firstName, lastName, phone, address, city); // new entry added
-
+   
       newEntry.next = entry.next; // connects newEntry to node after entry
       entry.next = newEntry; // connects entry to newEntry
    }
@@ -275,13 +275,29 @@ class LinkedList {
       Node entry = findEntry(phoneBook);
       
       //if entry is head node cody next node info and unlink to next node
+      
+      
+      
       if (entry.firstName.equals(phoneBook.head.firstName)&& entry.lastName.equals(phoneBook.head.lastName)){
+        
+         if(entry.next == null){
+         
+            entry.firstName = null; 
+            entry.lastName = null;
+            entry.phone = null;
+            entry.address = null;
+            entry.city = null;
+            entry.next = null;
+         }
+        
+        
          entry.firstName = entry.next.firstName; 
          entry.lastName = entry.next.lastName;
          entry.phone = entry.next.phone;
          entry.address = entry.next.address;
          entry.city = entry.next.city;
          entry.next = entry.next.next;
+         
       }
       // if entry is not the head 
       else{  
@@ -289,14 +305,14 @@ class LinkedList {
          while (beforeEntry.next != entry) { // only last node will have next = null;
             beforeEntry = beforeEntry.next; // moves to the next node
          } // end while
-
-        if(beforeEntry.next.next != null) { // if theres a node after node we want to delete, connect to it
-         beforeEntry.next = beforeEntry.next.next;
-        }
-        else { // cut connection
-        beforeEntry.next = null;
-        }
-        entry.next = null; // cuts entry's connection to next node
+      
+         if(beforeEntry.next.next != null) { // if theres a node after node we want to delete, connect to it
+            beforeEntry.next = beforeEntry.next.next;
+         }
+         else { // cut connection
+            beforeEntry.next = null;
+         }
+         entry.next = null; // cuts entry's connection to next node
       }
       
       loop();
