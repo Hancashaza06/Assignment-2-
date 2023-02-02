@@ -25,12 +25,19 @@ class LinkedList {
    {
       Node currentNode = phoneBook.head; // starts by looking at head value
       System.out.println("\nPHONE DIRECTORY:");
+      // head has no value
+      if(currentNode.firstName == null) {
+         System.out.println("No Entries In Directory");
+      }
+      // if head has a value
+      else {
         // Traverse through the LinkedList
-      while (currentNode != null) {
-         System.out.println(currentNode.firstName + " " + currentNode.lastName + ":");
-         System.out.println(currentNode.phone + ", " + currentNode.address + ", " + currentNode.city + ".");
-         currentNode = currentNode.next; // go to the next node
-      } // end of while
+         while (currentNode != null) {
+            System.out.println(currentNode.firstName + " " + currentNode.lastName + ":");
+            System.out.println(currentNode.phone + ", " + currentNode.address + ", " + currentNode.city + ".");
+            currentNode = currentNode.next; // go to the next node
+         } // end of while
+      } // end of else
       loop();
    } // end viewDirectory
     
