@@ -319,9 +319,13 @@ class LinkedList {
             entry.city = null;
             entry.next = null;
          }
-        
          else {
-         entry = entry.next;
+            entry.firstName = entry.next.firstName; 
+            entry.lastName = entry.next.lastName;
+            entry.phone = entry.next.phone;
+            entry.address = entry.next.address;
+            entry.city = entry.next.city;
+            entry.next = entry.next.next;
          }
       }
       // if entry is not the head 
