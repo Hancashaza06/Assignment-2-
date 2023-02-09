@@ -375,6 +375,17 @@ class LinkedList {
    public static void loop() {
       Scanner input = new Scanner(System.in); // creates scanner method
       int answer = 0;
+      while (answer < 1 || answer >2) {
+         try {
+             System.out.print("\nWhat Would You Like To Do? 1 = Return To Main Menu 2 = End Program\t");
+            answer = input.nextInt();
+         } catch (InputMismatchException e) {
+            String error = input.nextLine();
+         }
+         if (answer < 1 || answer > 2) {
+            System.out.println("Error: Not A Valid Response");
+         }
+      } // end of while
       System.out.print("\nWhat Would You Like To Do? 1 = Return To Main Menu 2 = End Program\t");
       answer = input.nextInt();
       if (answer == 1) {
