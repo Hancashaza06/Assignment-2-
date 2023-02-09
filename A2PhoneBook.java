@@ -381,8 +381,6 @@ class LinkedList {
             System.out.println("Error: Not A Valid Response");
          }
       } // end of while
-      System.out.print("\nWhat Would You Like To Do? 1 = Return To Main Menu 2 = End Program\t");
-      answer = input.nextInt();
       if (answer == 1) {
          mainMenu();
       } else {
