@@ -99,7 +99,7 @@ class LinkedList {
    
    public static void addEntry(LinkedList phoneBook) {
       Scanner input = new Scanner(System.in); // creates scanner method
-      int answer;
+      int answer = 0;
       while (answer < 1 || answer > 3) {
          try {
             System.out.println("Where In The Phone Book Would You Like To Add The New Entry? 1 = Beginning 2 = Middle 3 = End");
