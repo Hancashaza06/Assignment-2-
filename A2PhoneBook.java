@@ -321,12 +321,7 @@ class LinkedList {
          }
         
          else {
-         entry.firstName = entry.next.firstName; 
-         entry.lastName = entry.next.lastName;
-         entry.phone = entry.next.phone;
-         entry.address = entry.next.address;
-         entry.city = entry.next.city;
-         entry.next = entry.next.next;
+         entry = entry.next;
          }
       }
       // if entry is not the head 
