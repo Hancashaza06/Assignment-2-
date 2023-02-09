@@ -244,8 +244,20 @@ class LinkedList {
       String edit;
    
       System.out.println("What Information Would You Like To Update?");
+     
+      try{
       System.out.print("1 = First Name, 2 = Last Name, 3 = Phone Number, 4 = Adress, 5 = City\t");
       answer = input.nextInt();
+        
+        } catch (InputMismatchException e) {
+            String error = input.nextLine();
+         }
+         if (answer < 1 || answer > 5) {
+            System.out.println("Error: Not A Valid Response");
+         }
+
+      
+  
       switch (answer) {
       
          case 1:
