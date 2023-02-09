@@ -245,6 +245,7 @@ class LinkedList {
    
       System.out.println("What Information Would You Like To Update?");
      
+     //new try catch - jas
       try{
       System.out.print("1 = First Name, 2 = Last Name, 3 = Phone Number, 4 = Adress, 5 = City\t");
       answer = input.nextInt();
