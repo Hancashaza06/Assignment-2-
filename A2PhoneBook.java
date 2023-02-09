@@ -245,7 +245,7 @@ class LinkedList {
    
       System.out.println("What Information Would You Like To Update?");
      
-     //new try catch - jas
+     while (answer < 1 || answer >5){
       try{
       System.out.print("1 = First Name, 2 = Last Name, 3 = Phone Number, 4 = Adress, 5 = City\t");
       answer = input.nextInt();
@@ -256,7 +256,7 @@ class LinkedList {
          if (answer < 1 || answer > 5) {
             System.out.println("Error: Not A Valid Response");
          }
-
+     }
       
   
       switch (answer) {
