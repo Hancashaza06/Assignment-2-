@@ -1,3 +1,10 @@
+// Programmers: Ben Diskin, David Rukashaza-Hancock, T. Jake Holmes, Jaspreet Khatkar
+// CS 145: Face-To-Face
+// Date: 2/9/2023
+// Assignment: Phone Book
+// Purpose: The phone book node should contain at least first name, last name, address, city, and phone number fields in the phonebook node. The phonebook manager will allow you to either add an entry at the  beginning, middle, 
+// or end of the node (name, address, city, phone #), as well as delete, and modify the fields. Finally, you should be able to print out your list in a nice format.
+
 import java.util.*;
   
 class LinkedList {
